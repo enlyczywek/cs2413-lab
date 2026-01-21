@@ -7,7 +7,8 @@ int main(void) {
     printf("Name: YOUR_NAME_HERE\n");
     printf("R#: ****XXXXX\n");
     printf("Section: XXX\n");
-    printf("Message: I can use GitHub for CS2314 labs!\n");
+    printf("Message: I can use GitHub for CS2413 labs!\n");
 
     return 0;
+
 }
