@@ -12,9 +12,11 @@ int two_sum_sorted(const int* nums, int n, int target, int* out_i, int* out_j) {
             else if ((nums[i] + nums[j]) < target){
                 i++;
             }
-            else
+            else{
+                *out_i = i;
+                *out_j = j;
                 return 1;
-        
+            }        
         }
     }
     return 0;
