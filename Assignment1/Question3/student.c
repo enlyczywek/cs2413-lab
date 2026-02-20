@@ -28,6 +28,39 @@
 int* plusOne(int* digits, int digitsSize, int* returnSize) {
     // TODO: implement
 
+    *returnSize = digitsSize;
+    int i = digitsSize - 1;
+    digits[i]++;
+
+    for (; i > 0; i--) {
+        if (digits[i] == 10) {
+            digits[i] = 0;
+            
+            if (i != 0) {
+                digits[i-1]++;
+            }
+            
+        }
+    }
+    
+    if (digits[0] == 10) {
+        //int* larger_array = (int*)malloc((size_t)(digitsSize + 1) * sizeof(int));
+        int* larger_array = (int*)calloc((digitsSize + 1), sizeof(int));
+        for (int k = digitsSize; k > 0; k--){
+            larger_array[k] = digits[k - 1];
+        }
+        larger_array[0] = 1;
+        larger_array[1] = 0;
+        *returnSize = digitsSize + 1;
+        return larger_array;
+    }
+    else {
+        int* temp_array = (int*)malloc((size_t)(digitsSize) * sizeof(int));
+        for (int k = digitsSize - 1; k >= 0; k--) {
+            temp_array[k] = digits[k];
+        }
+        return temp_array;
+    }
     
 }
 
