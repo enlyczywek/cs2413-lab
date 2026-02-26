@@ -16,7 +16,6 @@
 
 int majorityElement(int* nums, int numsSize) {
      // TODO: implement
-
      int count = 0;
 
      for (int i = 0; i < numsSize; i++) {
@@ -29,6 +28,4 @@ int majorityElement(int* nums, int numsSize) {
          
      }
      return 0;
-
-
 }

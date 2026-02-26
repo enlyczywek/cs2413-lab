@@ -27,7 +27,6 @@
 
 int* plusOne(int* digits, int digitsSize, int* returnSize) {
     // TODO: implement
-
     *returnSize = digitsSize;
     int i = digitsSize - 1;
     digits[i]++;
@@ -61,6 +60,7 @@ int* plusOne(int* digits, int digitsSize, int* returnSize) {
         }
         return temp_array;
     }
+    
     
 }
 
