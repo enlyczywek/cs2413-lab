@@ -55,7 +55,18 @@ struct TreeNode {
     struct TreeNode *right;
 };
 
+int traverse_tree(struct TreeNode* root, int value){
+    if (root == NULL) return 0;
 
+    value = value*10 + root->val;
+
+    if (root->left == NULL && root->right == NULL) return value;
+
+    return traverse_tree(root->left, value) + traverse_tree(root->right, value);
+
+}
 int sumNumbers(struct TreeNode* root) {
       // TODO: implement
+
+      return traverse_tree(root, 0);
 }

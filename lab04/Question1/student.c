@@ -1,4 +1,6 @@
 #include <stddef.h>
+#include <limits.h>
+#include <stdlib.h>
 
 /*
 Question 1: Maximum Depth of Binary Tree
@@ -49,4 +51,14 @@ struct TreeNode {
 
 int maxDepth(struct TreeNode* root) {
   // TODO: implement
+
+    if (root == NULL) return 0;
+
+    int left_depth = maxDepth(root->left);
+    int right_depth = maxDepth(root->right);
+
+    if (left_depth > right_depth) return left_depth + 1;
+    else return right_depth + 1;
+
+
 }
