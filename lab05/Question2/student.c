@@ -40,13 +40,31 @@ You may use them, modify them, or remove them if you prefer your own design.
 */
 static void swap(int* a, int* b);
 static void heapifyUp(int* heap, int index);
-static void heapifyDown(int* heap, int size, int index);
+static void heapifyDown(int* heap, int size, int index); 
 
 /*
 Return the kth largest element in nums.
 */
 int findKthLargest(int* nums, int numsSize, int k) {
     /* Write your code here */
+    int* heap = (int*)malloc(k * sizeof(int));
+    int heapSize = 0;
+
+    for (int i = 0; i < numsSize; i++){
+        if (heapSize < k) {
+            heap[heapSize] = nums[i];
+            heapifyUp(heap, heapSize);
+            heapSize++;
+        }
+        else if (nums[i] > heap[0]) {
+            heap[0] = nums[i];
+            heapifyDown(heap, heapSize, 0);
+        }
+    }
+
+    int result = heap[0];
+    //free(heap);
+    return result;
     return 0;
 }
 
@@ -55,6 +73,9 @@ Optional helper: swap two integers.
 */
 static void swap(int* a, int* b) {
     /* Write your code here if you use this helper */
+    int* temp = *a;
+    *a = *b;
+    *b = temp;
 }
 
 /*
@@ -62,6 +83,12 @@ Optional helper: restore min-heap order from a node upward.
 */
 static void heapifyUp(int* heap, int index) {
     /* Write your code here if you use this helper */
+    while (index > 0 && heap[index] < heap[(index - 1) / 2]) {
+       
+        swap(&heap[index], &heap[(index - 1) / 2]);
+        index = (index - 1) / 2;
+    }
+    
 }
 
 /*
@@ -69,4 +96,24 @@ Optional helper: restore min-heap order from a node downward.
 */
 static void heapifyDown(int* heap, int size, int index) {
     /* Write your code here if you use this helper */
+    while(1){
+        int smallest_index = index;
+        int left_index = 2*index + 1;
+        int right_index = 2*index + 2;
+
+        if (left_index < size && heap[left_index] < heap[smallest_index]){
+            smallest_index = left_index;
+        }
+
+        if (right_index < size && heap[right_index] < heap[smallest_index]){
+            smallest_index = right_index;
+        }
+
+        if (smallest_index != index) {
+            swap(&heap[index], &heap[smallest_index]);
+            index = smallest_index;
+        }
+        else break;
+
+    }
 }
