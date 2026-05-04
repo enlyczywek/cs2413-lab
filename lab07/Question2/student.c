@@ -1,3 +1,4 @@
+#include <stddef.h>
 /*
 Question 2: Merge Sort
 
@@ -28,8 +29,61 @@ Notes:
 - You may use temporary arrays inside your merge function.
 */
 
+void merge(int arr[], int left, int mid, int right){
+    int i = left;
+    int j = mid + 1;
+    int temp[right + 1];
+    int idx = 0;
+
+
+    while (i <= mid && j <= right){
+        if (arr[i] < arr[j]){
+            temp[idx] = arr[i];
+            i++;
+        }
+        else{
+            temp[idx] = arr[j];
+            j++;
+        }
+        idx++;
+    }
+    
+    if (i > mid){
+        while (j <= right){
+            temp[idx] = arr[j];
+            idx++;
+            j++;
+        }
+    }
+    else {
+        while (i <= mid){
+            temp[idx] = arr[i];
+            idx++;
+            i++;
+        }
+
+    }
+
+    for (int k = 0; k < idx; k++){
+        arr[left + k] = temp[k];
+    }
+
+}
+
+void mergeSortHelper(int arr[], int left, int right){
+    int mid = 0;
+    if (left < right){
+        mid = (left + right)/2;
+        mergeSortHelper(arr, left, mid);
+        mergeSortHelper(arr, mid + 1, right);
+        merge(arr, left, mid, right);
+    }
+}
+
 void mergeSort(int arr[], int size) {
     // TODO: implement merge sort
+
+    mergeSortHelper(arr, 0, size - 1);
     (void)arr;
     (void)size;
 }
